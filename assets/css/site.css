@@ -94,7 +94,7 @@ html[dir="rtl"] .btn .arrow{transform:scaleX(-1)}
 
 /* Hero */
 .hero{padding:28px 0 56px}
-.hero .wrap{display:grid;gap:40px;align-items:center}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:36px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:400;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:20px;margin-bottom:18px}
 .hero h1{font-size:clamp(2.15rem,9vw,3.9rem);letter-spacing:-.01em}
 html[lang="en"] .hero h1{letter-spacing:-.025em}
@@ -106,18 +106,19 @@ html[lang="en"] .hero h1{letter-spacing:-.025em}
 .fineprint{margin-top:16px;font-size:14px;color:var(--text2);display:flex;flex-wrap:wrap;gap:4px 14px}
 .fineprint span{display:inline-flex;align-items:center;gap:6px}
 .fineprint svg{width:16px;height:16px;color:var(--accent)}
-@media (min-width:900px){.hero{padding:56px 0 88px}.hero .wrap{grid-template-columns:1.1fr .9fr;gap:56px}}
+@media (min-width:900px){.hero{padding:56px 0 88px}.hero .wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px}}
 
-/* Phone demo */
-.demo{position:relative;justify-self:center;width:100%;max-width:330px}
+/* Phone demo — fixed size: the typed search never changes its width. */
+.demo{position:relative;justify-self:center;width:260px;min-width:0;contain:inline-size}
+@media (min-width:600px){.demo{width:320px}}
 .phone{position:relative;border-radius:44px;background:var(--phone-frame);padding:10px;box-shadow:0 30px 60px -20px rgba(17,17,17,.35)}
-.screen{position:relative;border-radius:35px;background:var(--bg);overflow:hidden;padding:18px 16px 18px;min-height:560px;display:flex;flex-direction:column;gap:14px}
-.notch{width:90px;height:22px;border-radius:12px;background:var(--phone-frame);margin:-6px auto 2px}
+.screen{position:relative;border-radius:35px;background:var(--bg);overflow:hidden;padding:18px 14px 16px;display:flex;flex-direction:column;gap:12px}.notch{width:90px;height:22px;border-radius:12px;background:var(--phone-frame);margin:-6px auto 2px}
 .app-head{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:600}
 .app-head img{width:26px;height:26px;border-radius:8px}
 .searchbar{display:flex;align-items:center;gap:8px;height:52px;border-radius:26px;background:var(--surface);box-shadow:var(--shadow);padding-inline:16px 6px}
 .searchbar svg.mag{width:18px;height:18px;color:var(--text2);flex-shrink:0}
-.typed{flex:1;min-width:0;font-size:14px;font-weight:400;white-space:nowrap;overflow:hidden;color:var(--text);display:flex;justify-content:flex-end}
+.typed{flex:1 1 0;width:0;min-width:0;font-size:14px;font-weight:400;white-space:nowrap;overflow:hidden;color:var(--text);display:flex;justify-content:flex-start}
+.typed.over{justify-content:flex-end}
 .typed span{flex-shrink:0;unicode-bidi:plaintext}
 .typed span::after{content:"";display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-inline-start:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -281,3 +282,6 @@ footer nav a:hover{color:var(--text);text-decoration:underline}
 .lost{text-align:center;padding:80px 0}
 .lost img{width:96px;height:96px;border-radius:26px;margin:0 auto 24px}
 .lost p{color:var(--body);margin:12px auto 28px;max-width:40ch}
+
+/* Phone demo on small screens (kept last so it wins). */
+@media (max-width:599px){.phone{border-radius:38px;padding:8px}.screen{border-radius:31px}.searchbar{height:46px}.go{width:36px;height:36px}.app-head{font-size:14px}.found{font-size:12.5px}}

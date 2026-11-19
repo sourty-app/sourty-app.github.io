@@ -43,6 +43,11 @@
     scenes.forEach(function (s) { items.push({ q: s.getAttribute('data-q'), id: s.id }); });
     var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var i = 0;
+    // Long text slides inside the fixed search field (shows its end), like the real app.
+    function fit() {
+      var box = typed.parentElement;
+      box.classList.toggle('over', typed.scrollWidth > box.clientWidth);
+    }
     function show(n) {
       scenes.forEach(function (s, k) { s.classList.toggle('on', k === n); });
     }
@@ -50,10 +55,11 @@
       var item = items[i];
       var chars = Array.from(item.q);
       var k = 0;
-      typed.textContent = '';
+      typed.textContent = ''; fit();
       var t = setInterval(function () {
         k++;
         typed.textContent = chars.slice(0, k).join('');
+        fit();
         if (k >= chars.length) {
           clearInterval(t);
           setTimeout(function () {
