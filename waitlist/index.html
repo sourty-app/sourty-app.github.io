@@ -47,7 +47,7 @@
   <div class="wrap narrow">
     <div class="page-head">
       <h1>سجّل في قايمة الانتظار&nbsp;✨</h1>
-      <p>صورتي لسه بيتجهّز علشان ينزل على جوجل بلاي. سيب بياناتك، ونبلّغك أول ما ينزل.</p>
+      <p>صورتي لسه بيتجهّز علشان ينزل على جوجل بلاي. تقدر تجرّبه على موبايلك قبل ما ينزل، أو تسيب بياناتك ونبلّغك أول ما ينزل.</p>
     </div>
 
     <div class="form-wrap">
@@ -58,11 +58,23 @@
           <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="name-err">
           <p class="err" id="name-err">اكتب اسمك، ولو الاسم الأول.</p>
         </div>
+        <fieldset class="field choice" aria-describedby="mode-err">
+          <legend>عايز إيه؟</legend>
+          <label class="opt"><input type="radio" name="mode" value="test"><span><b>عايز أجرّبه دلوقتي</b><small>أسبوعين على موبايلي</small></span></label>
+          <ul class="test-note only-test" aria-label="قبل ما تجرّب">
+            <li>على موبايلات أندرويد، مش الآيفون.</li>
+            <li>التحميل حوالي ٣٤١ ميجا.</li>
+            <li>أول مرة هياخد وقت لحد ما يفهم صورك، وبعد كده البحث بيطلع في ثانية.</li>
+            <li>محتاجينه يفضل متسطّب على موبايلك ١٤ يوم.</li>
+          </ul>
+          <label class="opt"><input type="radio" name="mode" value="notify"><span><b>بلّغني لما ينزل</b></span></label>
+          <p class="err" id="mode-err">اختار واحدة من الاتنين.</p>
+        </fieldset>
         <div class="field">
-          <label for="contact">رقم واتساب أو إيميل</label>
-          <p class="hint" id="contact-hint">علشان نبلّغك أول ما صورتي ينزل.</p>
+          <label for="contact"><span class="only-notify">رقم واتساب أو إيميل</span><span class="only-test">إيميل الجيميل اللي على جوجل بلاي في موبايلك</span></label>
+          <p class="hint" id="contact-hint"><span class="only-notify">علشان نبلّغك أول ما صورتي ينزل.</span><span class="only-test">لازم يكون نفس الإيميل اللي فاتح بيه جوجل بلاي على موبايلك، علشان جوجل يعرفك كمختبر. تلاقيه لو فتحت جوجل بلاي ودوست على صورتك اللي فوق.</span></p>
           <input id="contact" name="contact" type="text" inputmode="email" autocomplete="email" dir="ltr" maxlength="120" required aria-describedby="contact-hint contact-err">
-          <p class="err" id="contact-err">اكتب رقم واتساب (زي 01012345678) أو إيميل صحيح.</p>
+          <p class="err" id="contact-err"><span class="only-notify">اكتب رقم واتساب (زي 01012345678) أو إيميل صحيح.</span><span class="only-test">اكتب إيميل الجيميل بتاعك، زي name@gmail.com</span></p>
         </div>
         <div class="field">
           <label for="phone">نوع موبايلك</label>
@@ -88,13 +100,14 @@
           <textarea id="wish" name="wish" maxlength="500" placeholder="مثلًا: إيصال الكهربا، أو صورة البطاقة…" aria-describedby="wish-hint"></textarea>
         </div>
         <div class="hp" aria-hidden="true"><label for="website">سيب الخانة دي فاضية</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        <p class="consent">بنستخدم بياناتك علشان نبلّغك لما صورتي ينزل. مش هنديها لحد، وتقدر تطلب نمسحها في أي وقت. التفاصيل في <a href="/privacy/#website">سياسة الخصوصية</a>.</p>
+        <p class="consent">بنستخدم بياناتك علشان نبلّغك لما صورتي ينزل، أو نضيفك كمختبر على جوجل بلاي لو اخترت التجربة. مش هنديها لحد تاني، وتقدر تطلب نمسحها في أي وقت. التفاصيل في <a href="/privacy/#website">سياسة الخصوصية</a>.</p>
         <button class="btn" type="submit">سجّلني</button>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
       <div class="thanks" role="status">
         <h2 tabindex="-1">اتسجّلت، شكرًا ليك&nbsp;🎉</h2>
-        <p>أول ما صورتي ينزل على جوجل بلاي، هنبلّغك.</p>
+        <p class="only-notify">أول ما صورتي ينزل على جوجل بلاي، هنبلّغك.</p>
+        <p class="only-test">هنضيف إيميلك كمختبر على جوجل بلاي، ونبعتلك لينك التجربة على الإيميل ده.</p>
         <p style="margin-top:20px"><a href="/">ارجع للرئيسية</a></p>
       </div>
     </div>

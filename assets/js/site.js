@@ -96,12 +96,27 @@
       iosNote.hidden = !/iphone|آيفون|ايفون|أيفون/i.test(phoneInput.value);
     }
     phoneInput.addEventListener('input', iosCheck);
+    // "Try it now" (closed test on Google Play) vs "tell me when it's out".
+    function mode() { var m = form.querySelector('input[name="mode"]:checked'); return m ? m.value : ''; }
+    form.querySelectorAll('input[name="mode"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        box.setAttribute('data-mode', mode());
+        form.elements['contact'].placeholder = mode() === 'test' ? 'name@gmail.com' : '';
+        check('mode', true);
+      });
+    });
     form.querySelectorAll('[data-pick]').forEach(function (b) {
       b.addEventListener('click', function () {
         phoneInput.value = b.getAttribute('data-pick'); iosCheck(); phoneInput.focus();
       });
     });
     function check(id, ok) {
+      if (id === 'mode') {
+        var fs = form.querySelector('.choice');
+        fs.classList.toggle('bad', !ok);
+        form.querySelectorAll('input[name="mode"]').forEach(function (r) { r.setAttribute('aria-invalid', ok ? 'false' : 'true'); });
+        return ok;
+      }
       var el = form.querySelector('#' + id); var f = el.closest('.field');
       f.classList.toggle('bad', !ok); el.setAttribute('aria-invalid', ok ? 'false' : 'true');
       return ok;
@@ -111,8 +126,11 @@
       var el = form.elements;
       var name = el['name'].value.trim(), contact = el['contact'].value.trim(), phone = el['phone'].value.trim(), wish = el['wish'].value.trim();
       var digits = contact.replace(/[٠-٩]/g, function (d) { return d.charCodeAt(0) - 0x660; }).replace(/[\s\-+()]/g, '');
-      var okContact = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) || /^\d{8,15}$/.test(digits);
-      var ok = [check('name', name.length > 0), check('contact', okContact), check('phone', phone.length > 0)];
+      var m = mode();
+      var isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact);
+      // Testers must give the Google account email used on Google Play; others may give WhatsApp or email.
+      var okContact = m === 'test' ? isEmail : (isEmail || /^\d{8,15}$/.test(digits));
+      var ok = [check('name', name.length > 0), check('mode', m !== ''), check('contact', okContact), check('phone', phone.length > 0)];
       if (ok.indexOf(false) !== -1) {
         var first = form.querySelector('[aria-invalid="true"]'); if (first) first.focus();
         return;
@@ -124,12 +142,70 @@
       }
       var b = form.querySelector('button[type="submit"]');
       b.disabled = true; status.textContent = isAr ? 'بنبعت…' : 'Sending…';
-      var data = new URLSearchParams({ name: name, contact: contact, phone: phone, wish: wish, lang: root.lang });
+      var data = new URLSearchParams({ name: name, mode: m, contact: contact, phone: phone, wish: wish, lang: root.lang });
       fetch(endpoint, { method: 'POST', mode: 'no-cors', body: data })
         .then(function () { box.classList.add('sent'); box.querySelector('.thanks h2').focus(); })
         .catch(function () {
           b.disabled = false;
           status.textContent = isAr ? 'معرفناش نبعت دلوقتي. اتأكد إن النت شغّال وجرّب تاني.' : "We couldn't send it. Check your connection and try again.";
+        });
+    });
+  }
+
+  /* Feedback form → the "Feedback" tab of the same Google Sheet. Text only: no photo upload. */
+  var fb = document.querySelector('[data-feedback]');
+  if (fb) {
+    var fbBox = fb.closest('.form-wrap');
+    var fbStatus = fb.querySelector('.form-status');
+    var fbEndpoint = fb.getAttribute('data-endpoint');
+    var fbPhone = fb.querySelector('#phone');
+    function kind() { var k = fb.querySelector('input[name="kind"]:checked'); return k ? k.value : ''; }
+    function mark(el, ok) {
+      el.closest('.field').classList.toggle('bad', !ok);
+      el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      return ok;
+    }
+    function markKind(ok) {
+      fb.querySelector('.choice').classList.toggle('bad', !ok);
+      fb.querySelectorAll('input[name="kind"]').forEach(function (r) { r.setAttribute('aria-invalid', ok ? 'false' : 'true'); });
+      return ok;
+    }
+    fb.querySelectorAll('input[name="kind"]').forEach(function (r) {
+      r.addEventListener('change', function () { fbBox.setAttribute('data-kind', kind()); markKind(true); });
+    });
+    fb.querySelectorAll('[data-pick]').forEach(function (b) {
+      b.addEventListener('click', function () { fbPhone.value = b.getAttribute('data-pick'); fbPhone.focus(); });
+    });
+    fb.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var el = fb.elements, k = kind();
+      var v = function (n) { return el[n].value.trim(); };
+      var search = k === 'search';
+      var ok = [
+        markKind(k !== ''),
+        search ? mark(el['query'], v('query').length > 0) : mark(el['query'], true),
+        search ? mark(el['expected'], v('expected').length > 0) : mark(el['expected'], true),
+        search ? mark(el['message'], true) : mark(el['message'], v('message').length > 0),
+        mark(el['phone'], v('phone').length > 0),
+        mark(el['email'], v('email') === '' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v('email')))
+      ];
+      if (ok.indexOf(false) !== -1) {
+        var first = fb.querySelector('[aria-invalid="true"]'); if (first) first.focus();
+        return;
+      }
+      if (el['website'].value) return; // spam bot filled the hidden field
+      var b = fb.querySelector('button[type="submit"]');
+      b.disabled = true; fbStatus.textContent = isAr ? 'بنبعت…' : 'Sending…';
+      var data = new URLSearchParams({
+        form: 'feedback', kind: k,
+        query: search ? v('query') : '', expected: search ? v('expected') : '', message: search ? '' : v('message'),
+        phone: v('phone'), version: v('version'), email: v('email'), lang: root.lang
+      });
+      fetch(fbEndpoint, { method: 'POST', mode: 'no-cors', body: data })
+        .then(function () { fbBox.classList.add('sent'); fbBox.querySelector('.thanks h2').focus(); })
+        .catch(function () {
+          b.disabled = false;
+          fbStatus.textContent = isAr ? 'معرفناش نبعت دلوقتي. اتأكد إن النت شغّال وجرّب تاني.' : "We couldn't send it. Check your connection and try again.";
         });
     });
   }

@@ -47,7 +47,7 @@
   <div class="wrap narrow">
     <div class="page-head">
       <h1>Join the waitlist&nbsp;✨</h1>
-      <p>Sourty is getting ready for Google Play. Leave your details and we'll let you know as soon as it's out.</p>
+      <p>Sourty is getting ready for Google Play. You can try it on your phone before it's out, or leave your details and we'll let you know as soon as it's released.</p>
     </div>
 
     <div class="form-wrap">
@@ -57,11 +57,23 @@
           <input id="name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="name-err">
           <p class="err" id="name-err">Please enter your name, even just your first name.</p>
         </div>
+        <fieldset class="field choice" aria-describedby="mode-err">
+          <legend>What would you like?</legend>
+          <label class="opt"><input type="radio" name="mode" value="test"><span><b>I want to try it now</b><small>Two weeks on my phone</small></span></label>
+          <ul class="test-note only-test" aria-label="Before you try it">
+            <li>For Android phones, not iPhone.</li>
+            <li>The download is about 341 MB.</li>
+            <li>The first time, it takes a while to understand your photos. After that, search shows results in a second.</li>
+            <li>Please keep it installed on your phone for 14 days.</li>
+          </ul>
+          <label class="opt"><input type="radio" name="mode" value="notify"><span><b>Tell me when it's out</b></span></label>
+          <p class="err" id="mode-err">Please pick one of the two.</p>
+        </fieldset>
         <div class="field">
-          <label for="contact">WhatsApp number or email</label>
-          <p class="hint" id="contact-hint">So we can tell you when Sourty is out.</p>
+          <label for="contact"><span class="only-notify">WhatsApp number or email</span><span class="only-test">The Gmail address you use for Google Play on your phone</span></label>
+          <p class="hint" id="contact-hint"><span class="only-notify">So we can tell you when Sourty is out.</span><span class="only-test">It must be the same email signed in to Google Play on your phone, so Google knows you're a tester. To find it, open Google Play and tap your profile picture at the top.</span></p>
           <input id="contact" name="contact" type="text" inputmode="email" autocomplete="email" maxlength="120" required aria-describedby="contact-hint contact-err">
-          <p class="err" id="contact-err">Enter a WhatsApp number (like 01012345678) or a valid email.</p>
+          <p class="err" id="contact-err"><span class="only-notify">Enter a WhatsApp number (like 01012345678) or a valid email.</span><span class="only-test">Enter your Gmail address, like name@gmail.com</span></p>
         </div>
         <div class="field">
           <label for="phone">Your phone</label>
@@ -87,13 +99,14 @@
           <textarea id="wish" name="wish" maxlength="500" placeholder="e.g. my electricity receipt, a photo of my ID…" aria-describedby="wish-hint"></textarea>
         </div>
         <div class="hp" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
-        <p class="consent">We use your details to tell you when Sourty is released. We won't give them to anyone, and you can ask us to delete them at any time. Details in the <a href="/en/privacy/#website">privacy policy</a>.</p>
+        <p class="consent">We use your details to tell you when Sourty is released, or to add you as a tester on Google Play if you chose to try it. We won't give them to anyone else, and you can ask us to delete them at any time. Details in the <a href="/en/privacy/#website">privacy policy</a>.</p>
         <button class="btn" type="submit">Sign me up</button>
         <p class="form-status" role="status" aria-live="polite"></p>
       </form>
       <div class="thanks" role="status">
         <h2 tabindex="-1">You're on the list, thank you&nbsp;🎉</h2>
-        <p>We'll let you know as soon as Sourty is on Google Play.</p>
+        <p class="only-notify">We'll let you know as soon as Sourty is on Google Play.</p>
+        <p class="only-test">We'll add your email as a tester on Google Play and send the test link to that email.</p>
         <p style="margin-top:20px"><a href="/en/">Back to home</a></p>
       </div>
     </div>

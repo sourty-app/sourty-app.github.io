@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ابعتلنا رأيك — صورتي</title>
+<meta name="description" content="قولّنا على بحث مطلعش، أو مشكلة، أو فكرة لصورتي.">
+<link rel="canonical" href="https://sourty-app.github.io/feedback/">
+<link rel="alternate" hreflang="ar" href="https://sourty-app.github.io/feedback/">
+<link rel="alternate" hreflang="en" href="https://sourty-app.github.io/en/feedback/">
+<link rel="alternate" hreflang="x-default" href="https://sourty-app.github.io/feedback/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="صورتي · Sourty">
+<meta property="og:title" content="ابعتلنا رأيك في صورتي 💬">
+<meta property="og:description" content="قولّنا على بحث مطلعش، أو مشكلة، أو فكرة.">
+<meta property="og:url" content="https://sourty-app.github.io/feedback/">
+<meta property="og:image" content="https://sourty-app.github.io/assets/img/og-ar.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F6F5F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/img/icon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+<link rel="stylesheet" href="/assets/css/site.css">
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<script src="/assets/js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">روح للمحتوى</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="صورتي، الرئيسية"><img src="/assets/img/icon.svg" alt="" width="36" height="36"><span><b>صورتي</b><small>SOURTY</small></span></a>
+    <nav class="nav" aria-label="القايمة">
+      <a href="/#features">المزايا</a>
+      <a href="/privacy/">الخصوصية</a>
+      <a href="/faq/">أسئلة</a>
+    </nav>
+    <button class="icon-btn theme" type="button" aria-label="الشكل الغامق">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg>
+    </button>
+    <a class="icon-btn lang" href="/en/feedback/" hreflang="en" lang="en">English</a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap narrow">
+    <div class="page-head">
+      <h1>ابعتلنا رأيك&nbsp;💬</h1>
+      <p>دوّرت على صورة ومطلعتش؟ لقيت مشكلة؟ عندك فكرة؟ كل رسالة بتساعدنا نخلّي صورتي أحسن.</p>
+    </div>
+
+    <div class="form-wrap">
+      <form class="form" data-feedback data-endpoint="https://script.google.com/macros/s/AKfycbyCx4sYYJ8Oi8bRlQgfupOWc4MKRLBI8ZF2JYwPU7FBeu-rVr9c0QcF_ZVKI650qOsP/exec" novalidate>
+        <p class="warn-note"><strong>متبعتش صور ولا سكرين شوت، ومتكتبش أسامي أو حاجات خاصة.</strong></p>
+        <fieldset class="field choice" aria-describedby="kind-err">
+          <legend>عايز تقولّنا على إيه؟</legend>
+          <label class="opt"><input type="radio" name="kind" value="search"><span><b>دوّرت على حاجة ومظهرتش</b></span></label>
+          <label class="opt"><input type="radio" name="kind" value="problem"><span><b>مشكلة</b></span></label>
+          <label class="opt"><input type="radio" name="kind" value="idea"><span><b>فكرة</b></span></label>
+          <label class="opt"><input type="radio" name="kind" value="other"><span><b>حاجة تانية</b></span></label>
+          <p class="err" id="kind-err">اختار نوع الرسالة.</p>
+        </fieldset>
+        <div class="field only-search">
+          <label for="query">كتبت إيه في البحث بالظبط؟</label>
+          <input id="query" name="query" type="text" maxlength="200" placeholder="مثلًا: فاتورة الكهربا" aria-describedby="query-err">
+          <p class="err" id="query-err">اكتب الكلام اللي دوّرت بيه.</p>
+        </div>
+        <div class="field only-search">
+          <label for="expected">كنت متوقّع يطلع إيه؟</label>
+          <textarea id="expected" name="expected" maxlength="500" placeholder="مثلًا: سكرين شوت للفاتورة، كان فيها المبلغ والتاريخ" aria-describedby="expected-err"></textarea>
+          <p class="err" id="expected-err">اوصف الصورة اللي كنت مستنيها، من غير أسامي.</p>
+        </div>
+        <div class="field only-msg">
+          <label for="message">اكتب رسالتك</label>
+          <textarea id="message" name="message" maxlength="1000" aria-describedby="message-err"></textarea>
+          <p class="err" id="message-err">اكتب رسالتك.</p>
+        </div>
+        <div class="field">
+          <label for="phone">نوع موبايلك</label>
+          <input id="phone" name="phone" type="text" maxlength="80" required placeholder="مثلًا: سامسونج A54" aria-describedby="phone-err">
+          <div class="chips" aria-label="اختيارات سريعة">
+            <button type="button" data-pick="سامسونج">سامسونج</button>
+            <button type="button" data-pick="شاومي / ريدمي">شاومي / ريدمي</button>
+            <button type="button" data-pick="أوبو">أوبو</button>
+            <button type="button" data-pick="ريلمي">ريلمي</button>
+            <button type="button" data-pick="هونر">هونر</button>
+            <button type="button" data-pick="هواوي">هواوي</button>
+            <button type="button" data-pick="فيفو">فيفو</button>
+            <button type="button" data-pick="إنفينكس / تكنو">إنفينكس / تكنو</button>
+          </div>
+          <p class="err" id="phone-err">اكتب نوع موبايلك، أو اختار من اللي فوق.</p>
+        </div>
+        <div class="field">
+          <label for="version">رقم نسخة التطبيق</label>
+          <p class="hint" id="version-hint">مش لازم. تلاقيه في «عن التطبيق» جوه صورتي.</p>
+          <input id="version" name="version" type="text" dir="ltr" maxlength="40" inputmode="decimal" aria-describedby="version-hint">
+        </div>
+        <div class="field">
+          <label for="email">إيميلك، لو عايزنا نرد عليك</label>
+          <p class="hint" id="email-hint">مش لازم.</p>
+          <input id="email" name="email" type="email" dir="ltr" autocomplete="email" maxlength="120" aria-describedby="email-hint email-err">
+          <p class="err" id="email-err">الإيميل ده مش مظبوط. صلّحه أو سيب الخانة فاضية.</p>
+        </div>
+        <div class="hp" aria-hidden="true"><label for="website">سيب الخانة دي فاضية</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <p class="consent">اللي بتكتبه هنا بنستخدمه علشان نحسّن صورتي، والإيميل علشان نرد عليك. مش هنديه لحد، وتقدر تطلب نمسحه في أي وقت. التفاصيل في <a href="/privacy/#website">سياسة الخصوصية</a>.</p>
+        <button class="btn" type="submit">ابعت</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="thanks" role="status">
+        <h2 tabindex="-1">وصلتنا، شكرًا ليك&nbsp;🙏</h2>
+        <p>هنقراها ونستخدمها علشان نخلّي صورتي أحسن.</p>
+        <p style="margin-top:20px"><a href="/feedback/">ابعت رسالة تانية</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/img/icon.svg" alt="" width="36" height="36"><span><b>صورتي</b><small>SOURTY</small></span></a>
+    <nav aria-label="روابط تانية">
+      <a href="/faq/">أسئلة وتواصل</a>
+      <a href="/privacy/">سياسة الخصوصية</a>
+      <a href="/en/feedback/" hreflang="en" lang="en">English</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
